@@ -3,7 +3,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const axios = require('axios').default;
-const APIKEY = '31983214-2696166acee282192c021d74b';
+const APIKEY = '32005488-91a2c39925c46094d47fb920c';
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const buttonLoadMore = document.querySelector('.load-more');
