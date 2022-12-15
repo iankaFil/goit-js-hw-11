@@ -34,7 +34,7 @@ export default class PixabayService {
 
     incrementPage() {
         this.page += 1;
-        this.totalPages = this.totalHits / this.per_page;
+        this.totalPages = Math.round(this.totalHits / this.per_page);
         if (this.totalPages <= this.page && this.totalPages !== 1) {
             Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
         }
