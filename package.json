@@ -20,8 +20,10 @@
   "dependencies": {
     "@swc/helpers": "^0.4.14",
     "axios": "^1.2.1",
+    "lodash.throttle": "^4.1.1",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.5",
+    "pixabay": "^0.0.1",
     "regenerator-runtime": "^0.13.11",
     "simplelightbox": "^2.11.0"
   },
