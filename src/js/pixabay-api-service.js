@@ -7,6 +7,7 @@ export default class PixabayService {
         this.searchQuery = "";
         this.per_page = 40;
         this.page = 1;
+        this.totalPages = 0;
     }
 
     fetchImages() {
@@ -24,16 +25,21 @@ export default class PixabayService {
                     this.totalHits = totalHits;
                     Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
                     return data.hits;
+                } else {
+                    Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+                    return [];
                 }
-
-                Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-                return [];
             });
     }
 
     incrementPage() {
         this.page += 1;
+        this.totalPages = this.totalHits / this.per_page;
+        if (this.totalPages <= this.page) {
+            Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+        }
     }
+
 
     resetPage() {
         this.page = 1;

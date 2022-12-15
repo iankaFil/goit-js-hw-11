@@ -42,16 +42,13 @@ function onLoadMore() {
 }
 
 function fetchImages() {
-    page += 1
     loadMoreBtn.classList.add("is-hidden");
 
     return pixabayService.fetchImages().then((images = []) => {
         appendImagesMarkup(images);
 
         const galleryItemsCount = document.querySelectorAll(".gallery .gallery-item").length;
-        if (galleryItemsCount >= page) {
-            Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
-        }
+
         if (images.length === 0 || galleryItemsCount >= pixabayService.totalHits) {
             loadMoreBtn.classList.add("is-hidden");
         } else {
