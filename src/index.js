@@ -18,7 +18,7 @@ form.addEventListener("submit", onSearch);
 loadMoreBtn.addEventListener("click", onLoadMore);
 
 
-function onSearch(evt) { 
+function onSearch(evt) {
     evt.preventDefault();
 
     pixabayService.query = evt.currentTarget.elements.searchQuery.value;
@@ -26,7 +26,7 @@ function onSearch(evt) {
 
     if (pixabayService.query === "") {
         return Notiflix.Notify.warning("Enter text to search the gallery.");
-    } 
+    }
 
     clearGalleryContainer();
     fetchImages().then(() => {
@@ -41,26 +41,29 @@ function onLoadMore() {
     });
 }
 
-function fetchImages() { 
+function fetchImages() {
+    page += 1
     loadMoreBtn.classList.add("is-hidden");
 
     return pixabayService.fetchImages().then((images = []) => {
         appendImagesMarkup(images);
-        
-        const galleryItemsCount = document.querySelectorAll(".gallery .gallery-item").length;
 
+        const galleryItemsCount = document.querySelectorAll(".gallery .gallery-item").length;
+        if (galleryItemsCount >= page) {
+            Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+        }
         if (images.length === 0 || galleryItemsCount >= pixabayService.totalHits) {
             loadMoreBtn.classList.add("is-hidden");
         } else {
             loadMoreBtn.classList.remove("is-hidden");
         }
-    });  
+    });
 }
 
 function smoothScroll() {
     const { height: cardHeight } = document
-                .querySelector(".gallery")
-                .firstElementChild.getBoundingClientRect();
+        .querySelector(".gallery")
+        .firstElementChild.getBoundingClientRect();
 
     window.scrollBy({
         top: cardHeight * 2,
