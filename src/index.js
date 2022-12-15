@@ -53,7 +53,6 @@ function fetchImages() {
             loadMoreBtn.classList.add("is-hidden");
             this.totalPages = Math.ceil(this.totalHits / this.per_page);
             Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
-
         } else {
             loadMoreBtn.classList.remove("is-hidden");
         }
