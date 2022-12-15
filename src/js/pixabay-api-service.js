@@ -20,10 +20,11 @@ export default class PixabayService {
             })
             .then(data => {
                 if (data.hits.length > 0) {
+
                     const totalHits = data.totalHits;
                     this.totalHits = totalHits;
+                    if (this.page === 1) { Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`); }
                     this.incrementPage();
-                    Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
                     return data.hits;
                 } else {
                     Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
@@ -34,12 +35,6 @@ export default class PixabayService {
 
     incrementPage() {
         this.page += 1;
-        this.totalPages = Math.round(this.totalHits / this.per_page + 1);
-        if (this.totalPages <= this.page) {
-            Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
-        }
-        console.log(this.totalPages);
-        console.log(this.page);
     }
 
 

@@ -20,9 +20,9 @@ loadMoreBtn.addEventListener("click", onLoadMore);
 
 function onSearch(evt) {
     evt.preventDefault();
-
-    pixabayService.query = evt.currentTarget.elements.searchQuery.value;
     pixabayService.resetPage();
+    pixabayService.query = evt.currentTarget.elements.searchQuery.value;
+
 
     if (pixabayService.query === "") {
         return Notiflix.Notify.warning("Enter text to search the gallery.");
@@ -51,6 +51,9 @@ function fetchImages() {
 
         if (images.length === 0 || galleryItemsCount >= pixabayService.totalHits) {
             loadMoreBtn.classList.add("is-hidden");
+            this.totalPages = Math.ceil(this.totalHits / this.per_page);
+            Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+
         } else {
             loadMoreBtn.classList.remove("is-hidden");
         }
