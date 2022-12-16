@@ -12,7 +12,14 @@ const form = document.querySelector("#search-form");
 const galleryContainer = document.querySelector(".gallery");
 const loadMoreBtn = document.querySelector(".load-more");
 const pixabayService = new PixabayService();
-
+export default class PixabayService {
+    constructor() {
+        this.searchQuery = "";
+        this.per_page = 40;
+        this.page = 1;
+        this.totalPages = 0;
+    }
+}
 
 form.addEventListener("submit", onSearch);
 loadMoreBtn.addEventListener("click", onLoadMore);
@@ -53,6 +60,7 @@ function fetchImages() {
             loadMoreBtn.classList.add("is-hidden");
             this.totalPages = Math.ceil(this.totalHits / this.per_page);
             Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+
         } else {
             loadMoreBtn.classList.remove("is-hidden");
         }
