@@ -14,9 +14,6 @@ const loadMoreBtn = document.querySelector(".load-more");
 const pixabayService = new PixabayService();
 export default class PixabayService {
     constructor() {
-        this.searchQuery = "";
-        this.per_page = 40;
-        this.page = 1;
         this.totalPages = 0;
     }
 }
